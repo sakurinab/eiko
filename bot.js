@@ -1000,8 +1000,8 @@ bot.on('guildMemberAdd', async member => {
 				.setTitle("⸝⸝ ♡₊˚ Teiko◞")
 				.setDescription(`Вы были кикнуты с сервера **Teiko 🩸**\n\nПричина: к сожалению, Ваш аккаунт был создан менее 30 дней назад.\n\nЕсли у Вас есть какие-либо вопросы - обратитесь к [bulokys#9977](https://discordapp.com/users/921741284824211486)`)
 				.setTimestamp();
-			bot.users.cache.get(member.user.id).send(accountKick).then(() => {
-				member.kick();
+			//bot.users.cache.get(member.user.id).send(accountKick).then(() => {
+				bot.channels.cache.get('').send(`${member.user} возможно чейто твинк!`)
 			});
 			return;
 		}
