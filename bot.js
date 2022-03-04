@@ -56,7 +56,7 @@ const reactrole = [{
 		roleID: "948886657480925184",
 		channelID: "948888758542032978",
 		messageID: "949206176657207296",
-		type: 0,
+		type: 1,
 		single: 0,
 	},
 	{
@@ -72,7 +72,7 @@ const reactrole = [{
 		roleID: "948886686706839592",
 		channelID: "948888758542032978",
 		messageID: "949206176657207296",
-		type: 0,
+		type: 1,
 		single: 0,
 	},
 	{
