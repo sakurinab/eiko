@@ -53,9 +53,9 @@ const announce = [
 //      2 - только удалять
 const reactrole = [{
 		emoji: "♀",
-		roleID: "",
-		channelID: "",
-		messageID: "",
+		roleID: "948886657480925184",
+		channelID: "948888758542032978",
+		messageID: "949206176657207296",
 		type: 0,
 		single: 0,
 	},
@@ -69,9 +69,9 @@ const reactrole = [{
 	},
 	{
 		emoji: "♂",
-		roleID: "",
-		channelID: "",
-		messageID: "",
+		roleID: "948886686706839592",
+		channelID: "948888758542032978",
+		messageID: "949206176657207296",
 		type: 0,
 		single: 0,
 	},
