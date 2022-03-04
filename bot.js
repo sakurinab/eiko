@@ -732,6 +732,10 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 		if (!user || user.bot || !reaction.message.channel.guild) return;
 		let msg = reaction.message;
 		let member = bot.guilds.cache.get(config.serverId).members.cache.get(user.id);
+		let indexes = [];
+		for (let i = 0; i < reactrole.length; i++) {
+			if (reactrole[i].messageID == msg.id) indexes.push(i);
+		}
 		if (msg.id == config.verificationMessage && msg.channel.id == config.verificationChannel) {
 			if (!member.roles.cache.has(config.nonverifiedUserRole)) {
 				member.roles.add(config.nonverifiedUserRole).then(c => {
@@ -762,10 +766,6 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 				});
 			}
 		}
-		let indexes = [];
-		for (let i = 0; i < reactrole.length; i++) {
-			if (reactrole[i].messageID == msg.id) indexes.push(i);
-		}
 		indexes.forEach(index => {
 			let emojiName = reactrole[index].emoji.split(":");
 			emojiName = emojiName[1];
@@ -774,9 +774,9 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 			}
 			if (msg.id == reactrole[index].messageID && reactrole[index].channelID == msg.channel.id && (reactrole[index].emoji == reaction.emoji.name || emojiName == reaction.emoji.name)) {
 				if (reactrole[index].type == 0 || reactrole[index].type == 1) {
-					member.roles.remove("908769352935940146");
+					member.roles.add(reactrole[index].roleID);
 				} else if (reactrole[index].type == 2) {
-					member.roles.add("908769352935940146");
+					member.roles.remove(reactrole[index].roleID);
 					msg.reactions.cache.find(r => r.emoji.name == reaction.emoji.name).users.remove(member);
 				}
 			}
