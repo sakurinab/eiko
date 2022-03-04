@@ -726,19 +726,14 @@ bot.on('ready', async () => {
 		console.log(`1.${err.name}\n2.${err.message}\n3.${err.stack}`);
 	}
 });
-
 bot.on("messageReactionAdd", async (reaction, user) => {
 	try {
 		if (!user || user.bot || !reaction.message.channel.guild) return;
 		let msg = reaction.message;
 		let member = bot.guilds.cache.get(config.serverId).members.cache.get(user.id);
-		let indexes = [];
-		for (let i = 0; i < reactrole.length; i++) {
-			if (reactrole[i].messageID == msg.id) indexes.push(i);
-		}
 		if (msg.id == config.verificationMessage && msg.channel.id == config.verificationChannel) {
-			if (!member.roles.cache.has(config.nonverifiedUserRole)) {
-				member.roles.add(config.nonverifiedUserRole).then(c => {
+			if (member.roles.cache.has(config.nonverifiedUserRole)) {
+				member.roles.remove(config.nonverifiedUserRole).then(c => {
 					let embed = new Discord.MessageEmbed()
 						.setColor(config.defaultColor)
 						.setTitle('⸝⸝ ♡₊˚ Встречаем нового участника!◞')
@@ -748,23 +743,19 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 						.setTimestamp();
 
 					member.guild.channels.cache.get(config.mainChannel).send(embed);
-					const welcomeMessageWelc = [`Привет, ${member}, добро пожаловать на сервер Teiko.`, `Здравствуй, ${member}, и добро пожаловать на сервер Teiko.`, `Добро пожаловать на сервере Teiko, ${member}.`, `${member}, добро пожаловать на сервер Teiko.`, `Привет, дорогой ${member}. Ты новенький на сервере Teiko?`, `Приветствую на сервере Teiko, ${member}!`, `${member}, добро пожаловать в дивный новый мир, друг!`, `${member}, приветствую в новом дивном мире!`]
-					const welcomeMessageName = [`Меня зовут Teiko.`, `Я - Teiko.`, `Можешь называть меня Teiko.`, `Можешь звать меня Teiko.`, `Твоё имя мы уже знаем, а меня ты можешь называть Teiko..`, `Как дела? Меня зовут Teiko..`, `Меня называют Teiko..`];
+					const welcomeMessageWelc = [`Привет, ${member}, добро пожаловать на сервер Derabbit.`, `Здравствуй, ${member}, и добро пожаловать на сервер Derabbit.`, `Добро пожаловать на сервере Derabbit, ${member}.`, `${member}, добро пожаловать на сервер Derabbit.`, `Привет, дорогой ${member}. Ты новенький на сервере Derabbit?`, `Приветствую на сервере Derabbit, ${member}!`, `${member}, добро пожаловать в дивный новый мир, друг!`, `${member}, приветствую в новом дивном мире!`]
+					const welcomeMessageName = [`Меня зовут Yuno .`, `Я - Yuno.`, `Можешь называть меня Yunya.`, `Можешь звать меняc Yuno.`, `Твоё имя мы уже знаем, а меня ты можешь называть Dead rabbit.`, `Как дела? Меня зовут Dead rabbit.`, `Меня называют Dead Rabbit.`];
 					const welcomeMessageLittleAbout = [`Я буду твоим личным гидом по данному серверу.`, `Я помогу тебе разобраться с функциями сервера!`, `Я помогу узнать тебе всю нужную информацию о данном сервере.`, `Я буду твоим помощником на сервере.`, `Я буду помогу тебе разобраться с этим сервером.`, `Я отвечу на любой твой вопрос, связанный с данным сервером.`, `Теперь я твой личный гид по серверу и помогу тебе узнать обо всём, что тут есть.`, `Я твой личный помощник на этом сервере и помогу тебе разобраться с его функциями.`];
 					const welcomeMessageEnding = [`Если у тебя есть какой-то вопрос, то обязательно задай его мне!`, `Если у тебя будут какие-то вопросы по поводу данного сервера, то задавай их мне!`, `Если тебе нужна помощь по серверу, то обязательно обращайся ко мне.`, `Если тебе захочется что-то спросить о сервере, то спроси у меня и я отвечу!`, `Если тебе требуется помощь по функционалу сервера, то спроси у меня!`, `Если тебе интересно, чем ты можешь тут заняться - обращайся ко мне.`, `Если ты хочешь узнать что-то о сервере - спроси меня!`, `Если тебе потребуется подсказка по функциям сервера - узнай у меня!`];
 					const welcomeMessageExamples = [`<@${config.botId}> как мне создать свой клан?`, `<@${config.botId}> чем тут заняться?`, `<@${config.botId}> расскажи о себе.`, `<@${config.botId}> куда отправлять свои фотографии?`, `<@${config.botId}> как создать приватку?`, `<@${config.botId}> как создать любовную комнату?`];
 					let welcomeMessage = welcomeMessageWelc[Math.floor(Math.random() * welcomeMessageWelc.length)] + ' ' + welcomeMessageName[Math.floor(Math.random() * welcomeMessageName.length)] + ' '  + welcomeMessageLittleAbout[Math.floor(Math.random() * welcomeMessageLittleAbout.length)] + ' ' + welcomeMessageEnding[Math.floor(Math.random() * welcomeMessageEnding.length)] + '\n' + 'Пример: ' + welcomeMessageExamples[Math.floor(Math.random() * welcomeMessageExamples.length)];
 					//member.guild.channels.cache.get(config.mainChannel).send(welcomeMessage);
-
-					let welcomeUserDMVerified = new Discord.MessageEmbed()
-						.setColor(config.defaultColor)
-						.setTitle("⸝⸝ ♡₊˚ Добро пожаловать на Teiko・🩸◞")
-						.setDescription('`' + `${member.user.username}` + '`' + `, **рады приветствовать тебя в наших рядах!** 💖\n\nВ [канале](https://discord.gg/t8GpZDQHyx) ты найдёшь всю информацию о **ролях** нашего сервера.\n\n[Тык](https://discord.gg/V53pn7KGAY) - **команды** нашего сервера\n\nИ **не** забудь про [путеводитель](https://discord.gg/sFNyk56Dxp)!\n\n*От людей - для людей.*`)
-						.setImage('	')
-						.setTimestamp();
-					bot.users.cache.get(member.user.id).send(welcomeUserDMVerified)
 				});
 			}
+		}
+		let indexes = [];
+		for (let i = 0; i < reactrole.length; i++) {
+			if (reactrole[i].messageID == msg.id) indexes.push(i);
 		}
 		indexes.forEach(index => {
 			let emojiName = reactrole[index].emoji.split(":");
@@ -812,6 +803,8 @@ bot.on("messageReactionRemove", async (reaction, user) => {
 		console.log(`1.${err.name}\n2.${err.message}\n3.${err.stack}`);
 	}
 });
+
+
 
 //делать что-то при ВЫХОДЕ юзера с сервера
 bot.on('guildMemberRemove', async member => {
