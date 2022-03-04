@@ -732,7 +732,7 @@ bot.on("messageReactionAdd", async (reaction, user) => {
 		let msg = reaction.message;
 		let member = bot.guilds.cache.get(config.serverId).members.cache.get(user.id);
 		if (msg.id == config.verificationMessage && msg.channel.id == config.verificationChannel) {
-			if (member.roles.cache.has(config.nonverifiedUserRole)) {
+			if (!member.roles.cache.has(config.nonverifiedUserRole)) {
 				member.roles.add(config.nonverifiedUserRole).then(c => {
 					let embed = new Discord.MessageEmbed()
 						.setColor(config.defaultColor)
