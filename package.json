@@ -1,0 +1,22 @@
+{
+  "name": "myfirstbot",
+  "version": "1.0.0",
+  "description": "derabbit bot",
+  "main": "bot.js",
+  "dependencies": {
+    "big-integer": "^1.6.48",
+    "canvas": "^2.8.0",
+    "discord-buttons": "^3.2.1",
+    "discord.js": "^12.5.3",
+    "discord.js-pagination": "^1.0.3",
+    "discordjs-reaction-role": "^1.0.0",
+    "image-url-validator": "^1.0.4",
+    "mongoose": "^5.12.4",
+    "ms": "^2.1.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kristopher",
+  "license": "ISC"
+}
